@@ -1,6 +1,6 @@
 import "package:bloc/bloc.dart";
-import "../../../data/model/book.dart";
-import "../../../data/api/book_api.dart";
+import "../../data/model/book.dart";
+import "../../data/api/book_api.dart";
 import "books_event.dart";
 import "books_state.dart";
 
@@ -10,7 +10,6 @@ class BooksBloc extends Bloc<BookEvent,BooksState> {
     late int limit;
     final _bookApi=BookApi();
     String currentQuery="";
-    //super state recheck
      BooksBloc():super(BookFetched([])){
       on<Fetch>(_onFetch);
       on<Search>(_onSearch);

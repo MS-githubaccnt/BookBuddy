@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/main_screen/bloc/books_bloc.dart';
-import 'package:flutter_application_1/presentation/main_screen/bloc/books_event.dart';
-import 'package:flutter_application_1/presentation/main_screen/bloc/books_state.dart';
-import 'package:flutter_application_1/presentation/main_screen/widgets/book_tile.dart';
+import 'package:flutter_application_1/presentation/bloc/books_bloc.dart';
+import 'package:flutter_application_1/presentation/bloc/books_event.dart';
+import 'package:flutter_application_1/presentation/bloc/books_state.dart';
+import 'package:flutter_application_1/presentation/widgets/book_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {

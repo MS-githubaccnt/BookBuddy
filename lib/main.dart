@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/main_screen/bloc/books_bloc.dart';
-import 'package:flutter_application_1/presentation/main_screen/bloc/screens/main_screen.dart';
+import 'package:flutter_application_1/presentation/bloc/books_bloc.dart';
+import 'package:flutter_application_1/presentation/screens/main_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   runApp(const MainApp());
