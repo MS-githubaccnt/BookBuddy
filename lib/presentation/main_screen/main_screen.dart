@@ -6,14 +6,16 @@ import 'package:flutter_application_1/presentation/main_screen/widgets/book_tile
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {
- MainScreen({super.key});
- @override
-  _MainScreenState createState()=>_MainScreenState();
- }
- class _MainScreenState extends State<MainScreen>{
- final ScrollController _scrollController=ScrollController();
- bool _isFetching=false;
- @override
+  MainScreen({super.key});
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isFetching = false;
+
+  @override
   void initState() {
     super.initState();
 
@@ -24,76 +26,62 @@ class MainScreen extends StatefulWidget {
       }
     });
   }
-   @override
+
+  @override
   void dispose() {
-    _scrollController.dispose(); // Dispose controller to avoid memory leaks
+    _scrollController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      home:Scaffold(
-        appBar:AppBar(
-          backgroundColor:Colors.blue,
-          title:Text("Book Buddy",
-          style: TextStyle(
-            color:Colors.white
-          ),),
-          centerTitle: true,
-          //shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          title: Text(
+            "Book Buddy",
+            style: TextStyle(color: Colors.white),
           ),
-          body:BlocBuilder<BooksBloc,BooksState>(builder: (context,state){
-           if( state is BookError){
-            return Text("error");
+          centerTitle: true,
+        ),
+        body: BlocBuilder<BooksBloc, BooksState>(
+          builder: (context, state) {
+            if (state is BookError) {
+              return Center(child: Text("Error: ${state.errorMessage}"));
+            } else if (state is BookFetched || state is BookLoading) {
+              final books = (state is BookFetched)?state.books:(state as BookLoading).books;
+              _isFetching = false;
 
-           } else if(state is BookFetched){
-            _isFetching=false;
-            if(state.books.isEmpty){
-              context.read<BooksBloc>().add(Fetch());
-            }
-            
-            return ListView.builder(
-              controller:_scrollController,
-              itemCount: state.books.length,
-              itemBuilder: (context,index){
-                final books=(state).books;
-                return BookTile(book: books[index]);
+              if (books.isEmpty && state is BookFetched) {
+                context.read<BooksBloc>().add(Fetch());
               }
-            );
-           }
-           else if(state is BookLoading){
-            if(state.books.isEmpty){
-            return Center(child: CircularProgressIndicator());}
-            else{
-              return Column(
-                children: [
-                  Flexible(
-                    child: ListView.builder(
-                                  controller:_scrollController,
-                                  itemCount: state.books.length+1,
-                                  itemBuilder: (context,index)
-                                  {
-                                    final books=(state).books;
-                                    if(index<state.books.length) {
-                    return BookTile(book: books[index]);
-                                    } else {
-                    return Center(child: CircularProgressIndicator());
-                                    }
-                                  }
-                                ),
-                  ),CircularProgressIndicator()
 
-                ],
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (_scrollController.hasClients) {
+                  _scrollController.jumpTo(_scrollController.position.pixels);
+                }
+              });
+              if(books.isEmpty){
+                return Center(child: CircularProgressIndicator());
+              }
+              return ListView.builder(
+                controller: _scrollController,
+                itemCount: state is BookLoading ? books.length + 1 : books.length,
+                itemBuilder: (context, index) {
+                  if (index < books.length) {
+                    return BookTile(book: books[index]);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
               );
+            } else {
+              return const Center(child: CircularProgressIndicator());
             }
-           
-          }else{
-            return CircularProgressIndicator();
-          }
-          }
-          )
-        
-      )
-      );
+          },
+        ),
+      ),
+    );
   }
 }
