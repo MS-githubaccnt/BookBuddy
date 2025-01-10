@@ -6,14 +6,17 @@ class BookTile extends StatelessWidget{
   const BookTile({required this.book,super.key});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape:RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10)
-      ),
-      elevation:10,
-      margin:const EdgeInsets.all(4),
-      child:Center(
-        child:Text(book.title!),
+    return SizedBox(
+      height:200,
+      child: Card(
+        shape:RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)
+        ),
+        elevation:10,
+        margin:const EdgeInsets.symmetric(horizontal:12, vertical:6),
+        child:Center(
+          child:Text(book.title!),
+        ),
       ),
     );
     

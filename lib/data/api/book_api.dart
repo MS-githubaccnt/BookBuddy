@@ -20,7 +20,7 @@ class BookApi{
     
    }catch(e){
     print("Error in api call $e");
-    return null;
+    return [];
    }
   }
 }
