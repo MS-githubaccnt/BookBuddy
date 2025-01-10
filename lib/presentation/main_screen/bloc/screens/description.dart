@@ -51,8 +51,7 @@ class bookDescription extends StatelessWidget{
                 ),
               ),
               SizedBox(height: 8),
-              Row(
-                children: [
+              
                   Text(
                     "By: ${book.author ?? 'Unknown Author'}",
                     style: TextStyle(
@@ -68,9 +67,8 @@ class bookDescription extends StatelessWidget{
                       color: Colors.grey[600],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 8),
+  
+
               Text(
                 "Publisher: ${book.publisher ?? 'Unknown Publisher'}",
                 style: TextStyle(
