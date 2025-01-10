@@ -20,6 +20,7 @@ class BooksBloc extends Bloc<BookEvent,BooksState> {
         final fetchedBooks=await _bookApi.fetchBooks(startingIndex)??[];
         _bookList.addAll(fetchedBooks);
         emit(BookFetched(_bookList));
+        print(_bookList);
         currentPage++;
       }catch(e){
         emit(BookError(e.toString()));

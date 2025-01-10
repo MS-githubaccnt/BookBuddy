@@ -19,15 +19,19 @@ class Book{
 
   );
   factory Book.fromJson(Map<String,dynamic> Combinedjson){
-    final bookData=Combinedjson['volumeInfo'];
+    final bookData=Combinedjson['volumeInfo']??{};
     return Book(
-      title: bookData['title'],
-      author: bookData['authors']?bookData['authors'][0]:'Not Found',
+      title: bookData['title']??"Title not found",
+      author: (bookData['authors'] != null && bookData['authors'].isNotEmpty)
+        ? bookData['authors'][0]
+        : "Author Not Found",
       description: bookData['description']??"Description Not Found",
-      selfLink:Combinedjson["selfLink"],
-      thumbnail: bookData["imageLinks"]["thumbnail"],
+      selfLink:Combinedjson["selfLink"]??" ",
+      thumbnail:(bookData['imageLinks'] != null && bookData['imageLinks'].isNotEmpty)
+        ? bookData['imageLinks']["thumbnail"]
+        :'',
       publisher:bookData["publisher"]??"Unknown Publisher",
-      publishedDate:bookData["publishedDate"]
+      publishedDate:bookData["publishedDate"]??" "
     );
   }
   Map<String,dynamic>toJSon()=>{

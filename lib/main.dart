@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/main_screen/bloc/books_bloc.dart';
 import 'package:flutter_application_1/presentation/main_screen/main_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   runApp(const MainApp());
 }
@@ -9,9 +11,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title:"Book Buddy",
-      home:MainScreen()
-      );
+    return BlocProvider(
+      create:(BuildContext context)=> BooksBloc(),
+      child:  MaterialApp(
+        title:"Book Buddy",
+        home:MainScreen()
+        ),
+    );
   }
 }

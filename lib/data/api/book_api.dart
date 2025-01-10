@@ -10,9 +10,12 @@ class BookApi{
        "${url}"+"?q=$query"+"&maxResults=$maxResults"+"&startIndex=$startIndex"+"&printType=books"
     ));
       final data=json.decode(response.body);
-      final List<Book> BookList=data["items"].map(
+      print(data);
+      print("dataa");
+      final List<Book> BookList=(data["items"] as List).map(
         (book)=>Book.fromJson(book)
       ).toList();
+      print (BookList);
       return BookList;
     
    }catch(e){
