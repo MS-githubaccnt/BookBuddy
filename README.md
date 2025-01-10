@@ -1,11 +1,11 @@
-#BOOK BUDDY
+# BOOK BUDDY
 Book Buddy is an application for Bibliophiles. It is built in flutter and utilises BLoC architecture for creating a maintainable and scalable codebase along with efficient state management. Further, Pagination reduces overhead for fetching data. Users may discover new books, learn more about them through their Description Pages or search for their favourites.<br>
 
-##Architecture
+## Architecture
 The app has been divided into 2 layers:<br>
-###1.Presentaion Layer:
+### 1.Presentaion Layer:
 Contains Widgets and UI components, along with a sublayer of BLoC which handles any changes to the state of the UI.<br>
-###2.Data Layer: 
+### 2.Data Layer: 
 Contains all the logic for interaction with external service such as a public api or to your backend to fetch, send and process data.<br>
 ```
 .
@@ -27,3 +27,35 @@ Contains all the logic for interaction with external service such as a public ap
         └── book_tile.dart
 
 ```
+## Setup
+### Requirements:
+Flutter:Version 3.x or later
+Dart SDK Version: ^3.6.0
+### Install:
+1. Clone into the repository
+```bash
+git clone https://github.com/MS-githubaccnt/BookBuddy/
+cd flutter_application_1
+```
+2. Get Dependencies
+```bash
+flutter pub get
+```
+3.Run the app
+```bash
+flutter run
+```
+4.To get an apk
+```bash
+flutter build apk --release
+cd build/app/outputs/flutter-apk
+```
+### DEMO:
+HomeScreen
+![alt](assets/homeScreen.png)
+Description
+![alt](assets/description.png)
+Pagination
+![alt](assets/pagination.png)
+Search
+![alt](assets/search.png)
